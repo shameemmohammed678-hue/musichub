@@ -28,3 +28,6 @@ backend/myenv/
 backend/db.sqlite3
 __pycache__/
 *.pyc
+
+
+public/songs
