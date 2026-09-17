@@ -1,11 +1,12 @@
+import { useEffect } from "react";
 import { Check, Heart, Play, Plus } from "lucide-react";
-
 import { useMusic } from "../context/MusicContext";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function SongCard({ song }) {
   const {
+    currentSong,
     setCurrentSong,
     favorites,
     toggleFavorite,
@@ -24,8 +25,38 @@ function SongCard({ song }) {
     (item) => item.id === song.id
   );
 
+  // Automatically bring the currently playing card into view on mobile
+  useEffect(() => {
+    if (
+      currentSong?.id === song.id &&
+      window.innerWidth <= 700
+    ) {
+      const timer = setTimeout(() => {
+        const card = document.getElementById(`song-card-${song.id}`);
+
+        if (card) {
+          card.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentSong, song.id]);
+
+  const handlePlay = () => {
+    setCurrentSong(song);
+  };
+
   return (
-    <div className="song-card">
+    <div
+      className={`song-card ${
+        currentSong?.id === song.id ? "currently-playing" : ""
+      }`}
+      id={`song-card-${song.id}`}
+    >
       <div className="song-image-container">
         <img
           src={song.cover}
@@ -35,7 +66,7 @@ function SongCard({ song }) {
 
         <button
           className="play-button"
-          onClick={() => setCurrentSong(song)}
+          onClick={handlePlay}
           aria-label={`Play ${song.title}`}
           title={`Play ${song.title}`}
         >
