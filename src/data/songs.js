@@ -88,6 +88,115 @@ const songs = [
       "images/karuppu.png",
     audio: "/songs/Verappa - Extended.mp3",
   },
+
+
+  {
+    id: 11,
+    title: "inayae",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/thadam.png",
+    audio: "/songs/Inayae-MassTamilan.org.mp3",
+  },
+
+  {
+    id: 12,
+    title: "Eppadi vandhaayo",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/Aaromaley.png",
+    audio: "/songs/Eppadi Vandhaayo.mp3",
+  },
+
+  {
+    id: 13,
+    title: "MaruVarthai pesathey",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/maruvarthai.png",
+    audio: "/songs/Maru-Varthai-Pesathey.mp3",
+  },
+
+   {
+    id: 14,
+    title: "Veera Raja Veera",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/ponnyin_selvan.png",
+    audio: "/songs/Veera-Raja-Veera.mp3",
+  },
+  {
+    id: 15,
+    title: "Keerthi love",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/dragon.png",
+    audio: "/songs/Keerthi Love.mp3",
+  },
+
+  {
+    id: 16,
+    title: "vazhithunaiye",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/dragon.png",
+    audio: "/songs/Vazhithunaiye.mp3",
+  },
+
+
+  {
+    id: 17,
+    title: "Nee Kavithaigala",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/Nee.png",
+    audio: "/songs/Nee-Kavithaigala.mp3",
+  },
+
+
+
+
+
+  {
+    id: 18,
+    title: "Mudhal Nee Mudivum Nee",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/mudhal-nee-mudivum-nee.png",
+    audio: "/songs/Mudhal-Nee-Mudivum-Nee.mp3",
+  },
+
+  {
+    id: 19,
+    title: "Kadhal Aasai",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/Kadhal aasai.png",
+    audio: "/songs/Kadhal-Aasai.mp3",
+  },
+
+  {
+    id: 20,
+    title: "Chinna Chinna Kangal",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/Goat.png",
+    audio: "/songs/Chinna Chinna Kangal.mp3",
+  },
+
+  
+
+  {
+    id: 21,
+    title: "Mavanae",
+    artist: "MusicHub Artist",
+    cover:
+      "/images/pattas.png",
+    audio: "/songs/Mavane.mp3",
+  },
+
+
+  
 ];
 
 export default songs;

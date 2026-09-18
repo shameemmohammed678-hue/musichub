@@ -24,9 +24,14 @@ dist-ssr
 *.sw?
 
 
+
+
+# Python / Django
 backend/myenv/
 backend/db.sqlite3
 __pycache__/
 *.pyc
 
-
+# Environment variables
+.env
+*.env
