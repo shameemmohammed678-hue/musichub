@@ -79,6 +79,7 @@ def login(request):
             "id": user.id,
             "username": user.username,
             "email": user.email,
+            "is_staff":user.is_staff
         }
     },
     status=status.HTTP_200_OK

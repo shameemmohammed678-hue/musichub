@@ -2791,3 +2791,464 @@ img {
     width: 100px;
   }
 }
+
+
+/* =========================================================
+   ADMIN — ADD SONG PAGE
+   ========================================================= */
+
+.admin-upload-page {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 10px 0 40px;
+}
+
+/* ---------- BACK BUTTON ---------- */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 25px;
+  padding: 9px 13px;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+
+  font-size: 13px;
+  font-weight: 550;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  color: #fff;
+
+  background: rgba(255, 45, 117, 0.1);
+  border-color: rgba(255, 45, 117, 0.3);
+
+  transform: translateX(-2px);
+}
+
+/* ---------- HEADER ---------- */
+
+.admin-upload-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+.admin-upload-header > svg {
+  width: 42px;
+  height: 42px;
+
+  padding: 9px;
+
+  border-radius: 12px;
+
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent-light),
+      var(--accent-dark)
+    );
+
+  box-shadow:
+    0 8px 25px rgba(255, 45, 117, 0.25);
+}
+
+.admin-upload-header h1 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: -0.6px;
+}
+
+.admin-upload-header p {
+  margin-top: 5px;
+
+  color: var(--text-muted);
+
+  font-size: 13px;
+}
+
+/* ---------- FORM CARD ---------- */
+
+.admin-upload-form {
+  position: relative;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.015)
+    );
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.35);
+
+  overflow: hidden;
+}
+
+.admin-upload-form::before {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  top: -130px;
+  right: -80px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 45, 117, 0.12);
+
+  filter: blur(60px);
+
+  pointer-events: none;
+}
+
+/* ---------- FORM GROUP ---------- */
+
+.form-group {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 21px;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 8px;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-group label svg {
+  color: var(--accent);
+}
+
+/* ---------- TEXT INPUTS ---------- */
+
+.form-group input[type="text"] {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 14px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  color: var(--text-primary);
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.form-group input[type="text"]:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.form-group input[type="text"]:focus {
+  background: rgba(255, 45, 117, 0.035);
+
+  border-color: rgba(255, 45, 117, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(255, 45, 117, 0.08);
+}
+
+.form-group input[type="text"]::placeholder {
+  color: var(--text-muted);
+}
+
+/* ---------- FILE INPUTS ---------- */
+
+.form-group input[type="file"] {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+
+  color: var(--text-muted);
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.form-group input[type="file"]:hover {
+  background: rgba(255, 45, 117, 0.035);
+
+  border-color: rgba(255, 45, 117, 0.4);
+}
+
+.form-group input[type="file"]::file-selector-button {
+  margin-right: 10px;
+
+  padding: 7px 12px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: rgba(255, 45, 117, 0.12);
+
+  color: var(--accent-light);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---------- MESSAGES ---------- */
+
+.upload-error,
+.upload-success {
+  position: relative;
+  z-index: 1;
+
+  margin: 8px 0 17px;
+
+  padding: 10px 12px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+}
+
+.upload-error {
+  color: #ff7895;
+
+  background: rgba(255, 45, 85, 0.08);
+
+  border: 1px solid rgba(255, 45, 85, 0.18);
+}
+
+.upload-success {
+  color: #72e6a2;
+
+  background: rgba(70, 220, 130, 0.08);
+
+  border: 1px solid rgba(70, 220, 130, 0.18);
+}
+
+/* ---------- UPLOAD BUTTON ---------- */
+
+.upload-song-button {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 47px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 8px;
+
+  border: none;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent-light),
+      var(--accent-dark)
+    );
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  box-shadow:
+    0 8px 25px rgba(255, 45, 117, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.upload-song-button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.05);
+
+  box-shadow:
+    0 12px 32px rgba(255, 45, 117, 0.3);
+}
+
+.upload-song-button:active {
+  transform: translateY(0);
+}
+
+.upload-song-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   ADMIN — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .admin-upload-page {
+    padding: 5px 0 30px;
+  }
+
+  .back-button {
+    margin-bottom: 20px;
+  }
+
+  .admin-upload-header {
+    gap: 11px;
+
+    margin-bottom: 22px;
+  }
+
+  .admin-upload-header > svg {
+    width: 38px;
+    height: 38px;
+
+    padding: 8px;
+
+    border-radius: 10px;
+  }
+
+  .admin-upload-header h1 {
+    font-size: 23px;
+  }
+
+  .admin-upload-header p {
+    font-size: 12px;
+  }
+
+  .admin-upload-form {
+    padding: 22px 17px;
+
+    border-radius: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-group input[type="text"] {
+    height: 44px;
+
+    font-size: 13px;
+  }
+
+  .form-group input[type="file"] {
+    padding: 10px;
+
+    font-size: 11px;
+  }
+
+  .form-group input[type="file"]::file-selector-button {
+    padding: 6px 9px;
+
+    font-size: 11px;
+  }
+
+  .upload-song-button {
+    height: 45px;
+
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================================
+   ADMIN — VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .admin-upload-form {
+    padding: 19px 14px;
+  }
+
+  .admin-upload-header h1 {
+    font-size: 21px;
+  }
+
+  .admin-upload-header p {
+    font-size: 11px;
+  }
+
+  .back-button {
+    font-size: 12px;
+  }
+}

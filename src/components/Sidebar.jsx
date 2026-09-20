@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Home, Heart, ListMusic } from "lucide-react";
+import { Home, Heart, ListMusic, PlusCircle } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
 function Sidebar() {
+  const { user } = useAuth();
+
   return (
     <aside className="sidebar">
       <h3>MENU</h3>
@@ -27,6 +30,15 @@ function Sidebar() {
             <span>Playlist</span>
           </NavLink>
         </li>
+
+        {user?.is_staff && (
+          <li>
+            <NavLink to="/admin/upload">
+              <PlusCircle size={18} />
+              <span>Add Song</span>
+            </NavLink>
+          </li>
+        )}
       </ul>
     </aside>
   );

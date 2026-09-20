@@ -10,6 +10,7 @@ import Favorites from "./pages/Favorites";
 import Playlist from "./pages/PlayList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AdminUpload from "./pages/AdminUpload";
 
 
 
@@ -60,6 +61,13 @@ function App() {
 
        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route path="/admin/upload" element={
+             <ProtectedRoute>
+                       <AdminUpload />
+                  </ProtectedRoute>
+                        }
+                        />
         </Routes>
         </div>
 

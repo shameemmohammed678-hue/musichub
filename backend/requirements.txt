@@ -8,3 +8,4 @@ sqlparse==0.6.0
 tzdata==2026.4
 PyMySQL
 python-dotenv==1.2.3 
+cloudinary
