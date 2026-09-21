@@ -1,29 +1,18 @@
 import { createContext, useContext, useState } from "react";
+import { API_URL } from "../api";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("musichub-user");
-
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
   const login = (userData, accessToken, refreshToken) => {
-    localStorage.setItem(
-      "musichub-user",
-      JSON.stringify(userData)
-    );
-
-    localStorage.setItem(
-      "musichub-access-token",
-      accessToken
-    );
-
-    localStorage.setItem(
-      "musichub-refresh-token",
-      refreshToken
-    );
+    localStorage.setItem("musichub-user", JSON.stringify(userData));
+    localStorage.setItem("musichub-access-token", accessToken);
+    localStorage.setItem("musichub-refresh-token", refreshToken);
 
     setUser(userData);
   };
@@ -47,7 +36,7 @@ export function AuthProvider({ children }) {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/accounts/token/refresh/",
+        `${API_URL}/api/accounts/token/refresh/`,
         {
           method: "POST",
           headers: {

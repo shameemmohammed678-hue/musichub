@@ -5,13 +5,14 @@ import { useAuth } from "../context/AuthContext";
 import { API_URL } from "../api";
 
 function AdminUpload() {
-  const { user, isLoggedIn } = useAuth();
+  const { user, isLoggedIn, refreshAccessToken } = useAuth();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [audio, setAudio] = useState(null);
   const [cover, setCover] = useState(null);
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -54,9 +55,13 @@ function AdminUpload() {
     try {
       setLoading(true);
 
-      const token = localStorage.getItem("musichub-access-token");
+      // Get current access token
+      let token = localStorage.getItem(
+        "musichub-access-token"
+      );
 
-      const response = await fetch(
+      // First upload attempt
+      let response = await fetch(
         `${API_URL}/api/music/songs/upload/`,
         {
           method: "POST",
@@ -67,6 +72,31 @@ function AdminUpload() {
         }
       );
 
+      // If access token expired, refresh it
+      if (response.status === 401) {
+        console.log("Access token expired. Refreshing token...");
+
+        token = await refreshAccessToken();
+
+        // Refresh failed
+        if (!token) {
+          setError("Session expired. Please login again.");
+          return;
+        }
+
+        // Retry upload with new access token
+        response = await fetch(
+          `${API_URL}/api/music/songs/upload/`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+          }
+        );
+      }
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -76,6 +106,7 @@ function AdminUpload() {
 
       setMessage("Song uploaded successfully!");
 
+      // Clear form
       setTitle("");
       setArtist("");
       setAudio(null);
@@ -83,6 +114,7 @@ function AdminUpload() {
 
       document.getElementById("audio-input").value = "";
       document.getElementById("cover-input").value = "";
+
     } catch (err) {
       console.error(err);
       setError("Something went wrong while uploading.");
@@ -105,6 +137,7 @@ function AdminUpload() {
 
         <div className="admin-upload-header">
           <Music2 size={28} />
+
           <div>
             <h1>Add New Song</h1>
             <p>Upload a song to MusicHub</p>
@@ -115,8 +148,10 @@ function AdminUpload() {
           className="admin-upload-form"
           onSubmit={handleSubmit}
         >
+
           <div className="form-group">
             <label>Song Title</label>
+
             <input
               type="text"
               placeholder="Enter song title"
@@ -127,6 +162,7 @@ function AdminUpload() {
 
           <div className="form-group">
             <label>Artist</label>
+
             <input
               type="text"
               placeholder="Enter artist name"
@@ -145,7 +181,9 @@ function AdminUpload() {
               id="audio-input"
               type="file"
               accept="audio/mpeg,audio/mp3"
-              onChange={(e) => setAudio(e.target.files[0])}
+              onChange={(e) =>
+                setAudio(e.target.files[0])
+              }
             />
           </div>
 
@@ -159,7 +197,9 @@ function AdminUpload() {
               id="cover-input"
               type="file"
               accept="image/*"
-              onChange={(e) => setCover(e.target.files[0])}
+              onChange={(e) =>
+                setCover(e.target.files[0])
+              }
             />
           </div>
 
@@ -182,10 +222,12 @@ function AdminUpload() {
           >
             <Upload size={18} />
 
-            {loading ? "Uploading..." : "Upload Song"}
+            {loading
+              ? "Uploading..."
+              : "Upload Song"}
           </button>
-        </form>
 
+        </form>
       </div>
     </main>
   );
