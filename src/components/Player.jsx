@@ -10,11 +10,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-import songs from "../data/songs";
 import { useMusic } from "../context/MusicContext";
 
 function Player() {
-  const { currentSong, setCurrentSong } = useMusic();
+  const { songs,currentSong, setCurrentSong } = useMusic();
 
   const audioRef = useRef(null);
 

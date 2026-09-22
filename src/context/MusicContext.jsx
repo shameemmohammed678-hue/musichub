@@ -13,12 +13,39 @@ const MusicContext = createContext();
 export function MusicProvider({ children }) {
   const { isLoggedIn } = useAuth();
 
+  const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
 
   const [favorites, setFavorites] = useState([]);
   const [playlist, setPlaylist] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
+
+  /*
+   * Load Songs
+   */
+  useEffect(() => {
+    const loadSongs = async () => {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/music/songs/`
+        );
+
+        const data = await response.json();
+
+        if (Array.isArray(data)) {
+          setSongs(data);
+        }
+      } catch (error) {
+        console.error(
+          "Error loading songs:",
+          error
+        );
+      }
+    };
+
+    loadSongs();
+  }, []);
 
   /*
    * Load Favorites + Playlist
@@ -36,7 +63,9 @@ export function MusicProvider({ children }) {
 
     if (!token) return;
 
-    // Load Favorites
+    /*
+     * Load Favorites
+     */
     fetch(`${API_URL}/api/music/favorites/`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -55,7 +84,9 @@ export function MusicProvider({ children }) {
         );
       });
 
-    // Load Playlist
+    /*
+     * Load Playlist
+     */
     fetch(`${API_URL}/api/music/playlists/`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -73,7 +104,6 @@ export function MusicProvider({ children }) {
           error
         );
       });
-
   }, [isLoggedIn]);
 
   /*
@@ -93,12 +123,10 @@ export function MusicProvider({ children }) {
         `${API_URL}/api/music/favorites/`,
         {
           method: "POST",
-
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             song_id: song.id,
           }),
@@ -113,19 +141,21 @@ export function MusicProvider({ children }) {
       }
 
       setFavorites((prevFavorites) => {
-        const alreadyFavorite = prevFavorites.some(
-          (favorite) => favorite.id === song.id
-        );
+        const alreadyFavorite =
+          prevFavorites.some(
+            (favorite) =>
+              favorite.id === song.id
+          );
 
         if (alreadyFavorite) {
           return prevFavorites.filter(
-            (favorite) => favorite.id !== song.id
+            (favorite) =>
+              favorite.id !== song.id
           );
         }
 
         return [...prevFavorites, song];
       });
-
     } catch (error) {
       console.error(
         "Error updating favorite:",
@@ -151,12 +181,10 @@ export function MusicProvider({ children }) {
         `${API_URL}/api/music/playlists/`,
         {
           method: "POST",
-
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             song_id: song.id,
           }),
@@ -171,19 +199,21 @@ export function MusicProvider({ children }) {
       }
 
       setPlaylist((prevPlaylist) => {
-        const alreadyInPlaylist = prevPlaylist.some(
-          (item) => item.id === song.id
-        );
+        const alreadyInPlaylist =
+          prevPlaylist.some(
+            (item) =>
+              item.id === song.id
+          );
 
         if (alreadyInPlaylist) {
           return prevPlaylist.filter(
-            (item) => item.id !== song.id
+            (item) =>
+              item.id !== song.id
           );
         }
 
         return [...prevPlaylist, song];
       });
-
     } catch (error) {
       console.error(
         "Error updating playlist:",
@@ -195,6 +225,8 @@ export function MusicProvider({ children }) {
   return (
     <MusicContext.Provider
       value={{
+        songs,
+
         currentSong,
         setCurrentSong,
 
